@@ -39,10 +39,6 @@ TEMPLATES = {
     """,
 }
 
-WRAPPER = """<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
-*{{margin:0;padding:0;box-sizing:border-box}}body{{width:1000px;height:420px;overflow:hidden}}
-</style></head><body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">{body}</body></html>"""
-
 STYLE_B = """
 body{{background:#0d0d0d;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}}
 .kicker{{font-size:14px;color:#f59e0b;text-transform:uppercase;letter-spacing:3px;margin-bottom:20px}}
@@ -75,14 +71,19 @@ h1{font-size:38px;font-weight:800;line-height:1.2;max-width:750px;margin:0 0 8px
 h1 .hl{color:#f87171}
 .subtitle{font-size:22px;color:#aaa;max-width:600px}
 """
-
 STYLES = {"A": STYLE_A, "B": STYLE_B, "C": STYLE_C}
+
+WRAPPER = """<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{{margin:0;padding:0;box-sizing:border-box}}body{{width:1000px;height:420px;overflow:hidden}}
+{}
+</style></head><body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">{}</body></html>"""
 
 async def render(config_path: str):
     cfg = yaml.safe_load(Path(config_path).read_text())
     template = TEMPLATES[cfg["template"]]
     body = template.format(**cfg["vars"])
-    html = WRAPPER.format(body=body)
+    style = STYLES[cfg["template"]]
+    html = WRAPPER.format(style, body)
     out = Path("covers") / f"{cfg['slug']}.png"
     out.parent.mkdir(exist_ok=True)
     async with async_playwright() as p:
