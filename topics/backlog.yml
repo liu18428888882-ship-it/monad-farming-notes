@@ -1,1 +1,32 @@
-# 待写选题池
+# 选题池 · 按 [REAL/TODO/SKIP] 标记
+
+- [REAL] Monad 1960 tx 复盘(进行中)
+- [TODO] Monad RPC 节点延迟对比
+- [REAL] Monad testnet 踩过的 5 个坑
+- [TODO] 7天 vs 30天 farming 节奏对比
+- [TODO] Multi-wallet 有用吗(1 vs 3 vs 5 wallet对比)
+- [REAL] Nonce collision: 从 12% 降到 0.3% 的 5 行代码
+- [TODO] Monad 合约类型 gas 对比表
+- [TODO] Burst vs steady mode 对比
+- [TODO] 30天追踪 funding rate 极端值预测能力
+- [TODO] OKX vs Binance vs Bybit funding rate 套利
+- [SKIP] AI 预测 funding rate(模型没跑)
+- [TODO] 资金费率 + RSI 回测(标记 backtest)
+- [REAL] 给 LLM agent 写 SKILL 的心得
+- [REAL] PIL 渲染封面: 从 Playwright 转过来
+- [REAL] verify 脚本能撒谎: 自检体系坏了
+- [TODO] LLM agent 工作流配置
+- [REAL] AI 帮我写 dev.to, 第一篇被识破(meta)
+- [TODO] 给 agent $100 让它"自己赚钱"
+- [REAL] 三周内 Telegram 封了 2 个 bot
+- [TODO] 100 个 testnet farming repo 趋势
+- [TODO] dev.to crypto 标签 100 篇标题模式
+- [TODO] 5 行 Python 监控 EVM mempool
+- [TODO] Telegraf + InfluxDB 监控 trading bot
+- [SKIP] How to set up Web3.py(已有一万人写过)
+- [TODO] 怎么写不会被 RPC ban 的 farming script
+- [TODO] 2026 年 testnet 值得 farm: 7 维度对比
+- [TODO] Monad TGE 后 airdrop 标准猜测
+- [TODO] 为什么大部分 farming guide 没用
+- [REAL] 第一次跑 trading bot 的心路
+- [SKIP] Why I love crypto(永远不要写)
