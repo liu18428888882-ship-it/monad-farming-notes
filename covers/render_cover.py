@@ -18,7 +18,7 @@ def render(out):
 
     # Terminal chrome
     draw.rectangle([(0,0), (W-1,29)], fill='#2d2d2d')
-    draw.text((12, 7), "paulchen@vps:~$ python monad_burst.py | grep TX", fill='#999', font=_font(13))
+    draw.text((12, 7), "vincentliu@vps:~$ python monad_burst.py | grep TX", fill='#999', font=_font(13))
 
     # Tx log lines — simulate tail -f
     logs = [
