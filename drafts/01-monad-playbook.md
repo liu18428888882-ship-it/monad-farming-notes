@@ -6,6 +6,8 @@ tags: crypto, blockchain, tutorial, python
 
 I lost $400 on a memecoin in March. Sitting at my desk at 2am questioning life choices, I figured if I'm going to be on-chain I might as well be on-chain *productively*. So I wrote a script to farm Monad testnet while I sleep. Two weeks and 1,960 transactions later, here's what actually worked — and the three approaches I tried first that didn't.
 
+Two weeks later, my wallet has 1,960 tx, my electricity bill went up maybe $7, and I have very specific opinions about nonce management that nobody asked for. Here are all of them.
+
 ## TL;DR
 
 - 1,960 transactions over 14 days, $0 spent (testnet MON is free from the faucet)
@@ -164,6 +166,8 @@ Second, the Day 5 explosion from 596 to 1,960. That's when I switched to burst m
 3. Health check from hour one. Two overnight crashes cost me 12+ hours of runtime. A cron job checking `get_transaction_count()` would have caught it within minutes.
 4. Test on multiple RPCs. Monad's public endpoint is solid but having a backup would have prevented one of the downtime windows.
 5. Use `estimate_gas` instead of hardcoding. The "out of gas" errors on contract deployment were 100% avoidable with a single function call.
+
+Honestly, I don't know if random 45-180s delays are actually optimal, or if I just got lucky on timing. Someone with more data, please tell me.
 
 ## Next
 
