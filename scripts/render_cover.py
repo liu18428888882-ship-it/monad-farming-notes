@@ -41,8 +41,15 @@ TEMPLATES = {
 
 WRAPPER = """<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
 *{{margin:0;padding:0;box-sizing:border-box}}body{{width:1000px;height:420px;overflow:hidden}}
-{style}
-</style></head><body>{body}</body></html>"""
+</style></head><body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">{body}</body></html>"""
+
+STYLE_B = """
+body{{background:#0d0d0d;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}}
+.kicker{{font-size:14px;color:#f59e0b;text-transform:uppercase;letter-spacing:3px;margin-bottom:20px}}
+.hero{{font-size:140px;font-weight:900;color:#4ade80;line-height:1;margin-bottom:12px}}
+.subtitle{{font-size:26px;color:#ccc;max-width:700px;text-align:center}}
+.footer{{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:11px;color:#555;font-family:monospace}}
+"""
 
 STYLE_A = """
 body{background:linear-gradient(135deg,#0a0a1a 0%,#1a1a3a 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif}
@@ -75,8 +82,7 @@ async def render(config_path: str):
     cfg = yaml.safe_load(Path(config_path).read_text())
     template = TEMPLATES[cfg["template"]]
     body = template.format(**cfg["vars"])
-    style = STYLES[cfg["template"]]
-    html = WRAPPER.format(style=style, body=body)
+    html = WRAPPER.format(body=body)
     out = Path("covers") / f"{cfg['slug']}.png"
     out.parent.mkdir(exist_ok=True)
     async with async_playwright() as p:
@@ -84,7 +90,9 @@ async def render(config_path: str):
         page = await browser.new_page(viewport={"width": 1000, "height": 420})
         await page.set_content(html)
         await page.wait_for_load_state("networkidle")
-        await page.wait_for_timeout(800)
+        await page.wait_for_timeout(3000)
+        await page.evaluate("document.fonts.ready")
+        await page.wait_for_timeout(500)
         await page.screenshot(path=str(out), clip={"x":0,"y":0,"width":1000,"height":420})
         await browser.close()
     print(f"✓ {out}")
